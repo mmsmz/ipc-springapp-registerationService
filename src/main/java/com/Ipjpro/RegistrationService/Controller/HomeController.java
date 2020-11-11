@@ -21,7 +21,7 @@ public class HomeController {
     }
 	
 	@PostMapping("/register")
-    public Integer register(@RequestBody StudentDto studentDto) {
+    public String register(@RequestBody StudentDto studentDto) {
         return studentService.Register(studentDto);
     }
 	

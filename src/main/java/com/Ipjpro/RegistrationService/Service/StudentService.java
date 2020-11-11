@@ -1,8 +1,10 @@
 package com.Ipjpro.RegistrationService.Service;
 
-import com.Ipjpro.RegistrationService.Dto.StudentDto;
+import org.springframework.stereotype.Service;
 
+import com.Ipjpro.RegistrationService.Dto.StudentDto;
+@Service
 public interface StudentService {
 
-	public Integer Register(StudentDto studentDto);
+	public String Register(StudentDto studentDto);
 }
