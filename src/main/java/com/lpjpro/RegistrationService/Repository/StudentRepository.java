@@ -9,7 +9,7 @@ import com.Ipjpro.RegistrationService.Entity.Student;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
-	List<Student> findByEmail(String Email);
-
-	List<Student> findByMobile(Integer Mobile);
+	List<Student> findByEmail(String email);
+	//List<Student> findByNicNr(String nicNr);
+	List<Student> findByMobile(String mobile);
 }

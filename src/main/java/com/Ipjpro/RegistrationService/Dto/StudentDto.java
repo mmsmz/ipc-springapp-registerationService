@@ -2,17 +2,45 @@ package com.Ipjpro.RegistrationService.Dto;
 
 public class StudentDto {
 
-	private String userName;
+	private String firstName;
+	private String lastName;
+	private String nicNr;
 	private String email;
-	private Integer mobile;
+	private String mobile;
+	private String password;
 	private Character gender;
 
-	public String getUserName() {
-		return userName;
+
+	public String getPassword() {
+		return password;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getNicNr() {
+		return nicNr;
+	}
+
+	public void setNicNr(String nicNr) {
+		this.nicNr = nicNr;
 	}
 
 	public String getEmail() {
@@ -23,11 +51,11 @@ public class StudentDto {
 		this.email = email;
 	}
 
-	public Integer getMobile() {
+	public String getMobile() {
 		return mobile;
 	}
 
-	public void setMobile(Integer mobile) {
+	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
 
@@ -38,5 +66,4 @@ public class StudentDto {
 	public void setGender(Character gender) {
 		this.gender = gender;
 	}
-
 }

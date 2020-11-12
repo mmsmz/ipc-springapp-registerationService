@@ -15,8 +15,14 @@ public class Student {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name = "Username")
-	private String userName;
+	@Column(name = "firstname")
+	private String firstName;
+
+	@Column(name = "lastname")
+	private String lastName;
+
+	@Column(name = "nicnr")
+	private String nicNr;
 
 	@Column(name = "Email")
 	private String email;
@@ -25,7 +31,7 @@ public class Student {
 	private String password;
 
 	@Column(name = "Mobile")
-	private Integer mobile;
+	private String mobile;
 
 	@Column(name = "gender")
 	private Character gender;
@@ -38,12 +44,28 @@ public class Student {
 		this.id = id;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getNicNr() {
+		return nicNr;
+	}
+
+	public void setNicNr(String nicNr) {
+		this.nicNr = nicNr;
 	}
 
 	public String getEmail() {
@@ -62,11 +84,11 @@ public class Student {
 		this.password = password;
 	}
 
-	public Integer getMobile() {
+	public String getMobile() {
 		return mobile;
 	}
 
-	public void setMobile(Integer mobile) {
+	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
 
@@ -77,5 +99,4 @@ public class Student {
 	public void setGender(Character gender) {
 		this.gender = gender;
 	}
-
 }
