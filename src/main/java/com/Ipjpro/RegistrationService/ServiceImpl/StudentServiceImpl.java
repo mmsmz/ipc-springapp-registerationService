@@ -8,10 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.Ipjpro.RegistrationService.Dto.StudentDto;
-import com.Ipjpro.RegistrationService.Entity.Student;
+import com.Ipjpro.RegistrationService.Entity.StudentEntity;
 import com.Ipjpro.RegistrationService.Service.StudentService;
 import com.lpjpro.RegistrationService.Repository.StudentRepository;
 
@@ -25,24 +26,32 @@ public class StudentServiceImpl implements StudentService {
     final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
     StudentRepository studentRepository;
+
+//    public StudentEntity saveStudent(final StudentDto studentDto) {
+//        StudentEntity studentModel = register(studentDto);
+//        return studentRepository.save(studentModel);
+//    }
 
     @Override
     public String register(StudentDto studentDto) {
 
         try {
-            List<Student> checkEmail = studentRepository.findByEmail(studentDto.getEmail());
+            List<StudentEntity> checkEmail = studentRepository.findByEmail(studentDto.getEmail());
             if (checkEmail.isEmpty()) {
-                List<Student> checkMobile = studentRepository.findByMobile(studentDto.getMobile());
+                List<StudentEntity> checkMobile = studentRepository.findByMobile(studentDto.getMobile());
                 if (checkMobile.isEmpty()) {
-                    List<Student> checkNicNr = studentRepository.findByNicNr(studentDto.getNicNr());
+                    List<StudentEntity> checkNicNr = studentRepository.findByNicNr(studentDto.getNicNr());
                     if (checkNicNr.isEmpty()) {
-                        Student student = new Student();
+                        StudentEntity student = new StudentEntity();
                         student.setFirstName(studentDto.getFirstName());
                         student.setLastName(studentDto.getLastName());
                         student.setNicNr(studentDto.getNicNr());
                         student.setEmail(studentDto.getEmail());
-                        student.setPassword(studentDto.getPassword());
+                        student.setPassword(passwordEncoder.encode(studentDto.getPassword()));
                         student.setMobile(studentDto.getMobile());
                         student.setGender(studentDto.getGender());
                         studentRepository.save(student);

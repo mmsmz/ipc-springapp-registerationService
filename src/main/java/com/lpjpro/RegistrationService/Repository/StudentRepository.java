@@ -5,11 +5,11 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.Ipjpro.RegistrationService.Entity.Student;
+import com.Ipjpro.RegistrationService.Entity.StudentEntity;
 
 @Repository
-public interface StudentRepository extends JpaRepository<Student, Long> {
-	List<Student> findByEmail(String email);
-	List<Student> findByNicNr(String nicNr);
-	List<Student> findByMobile(String mobile);
+public interface StudentRepository extends JpaRepository<StudentEntity, Long> {
+	List<StudentEntity> findByEmail(String email);
+	List<StudentEntity> findByNicNr(String nicNr);
+	List<StudentEntity> findByMobile(String mobile);
 }
