@@ -10,6 +10,18 @@ public class StudentDto {
 	private String password;
 	private Character gender;
 
+	@Override
+	public String toString() {
+		return "StudentDto{" +
+				"firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", nicNr='" + nicNr + '\'' +
+				", email='" + email + '\'' +
+				", mobile='" + mobile + '\'' +
+				", password='" + password + '\'' +
+				", gender=" + gender +
+				'}';
+	}
 
 	public String getPassword() {
 		return password;
