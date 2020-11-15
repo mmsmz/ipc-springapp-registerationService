@@ -1,5 +1,6 @@
 package com.Ipjpro.RegistrationService.ServiceImpl;
 
+import java.time.Instant;
 import java.util.List;
 
 import com.Ipjpro.RegistrationService.Controller.HomeController;
@@ -31,9 +32,9 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     StudentRepository studentRepository;
 
-//    public StudentEntity saveStudent(final StudentDto studentDto) {
-//        StudentEntity studentModel = register(studentDto);
-//        return studentRepository.save(studentModel);
+//   public StudentEntity saveStudent(final StudentDto studentDto) {
+//         StudentEntity studentModel = register(studentDto);
+//       return studentRepository.save(studentModel);
 //    }
 
     @Override
@@ -42,8 +43,6 @@ public class StudentServiceImpl implements StudentService {
         try {
             List<StudentEntity> checkEmail = studentRepository.findByEmail(studentDto.getEmail());
             if (checkEmail.isEmpty()) {
-                List<StudentEntity> checkMobile = studentRepository.findByMobile(studentDto.getMobile());
-                if (checkMobile.isEmpty()) {
                     List<StudentEntity> checkNicNr = studentRepository.findByNicNr(studentDto.getNicNr());
                     if (checkNicNr.isEmpty()) {
                         StudentEntity student = new StudentEntity();
@@ -51,19 +50,18 @@ public class StudentServiceImpl implements StudentService {
                         student.setLastName(studentDto.getLastName());
                         student.setNicNr(studentDto.getNicNr());
                         student.setEmail(studentDto.getEmail());
-                        student.setPassword(passwordEncoder.encode(studentDto.getPassword()));
                         student.setMobile(studentDto.getMobile());
                         student.setGender(studentDto.getGender());
+                        student.setDate(Instant.now());
+                        student.setUserType(HomeConstant.TYPE_STUDENT);
+                        student.setPassword(passwordEncoder.encode(studentDto.getPassword()));
+                        student.setLoginstatus(HomeConstant.activated);
                         studentRepository.save(student);
                         return HomeConstant.SUCCESSFULLY_REGISTERED;
                     } else {
                         logger.info(HomeConstant.NICNR_ALREADY_EXISTING);
                         return HomeConstant.NICNR_ALREADY_EXISTING;
                     }
-                } else {
-                    logger.info(HomeConstant.MOBILE_ALREADY_EXISTING);
-                    return HomeConstant.MOBILE_ALREADY_EXISTING;
-                }
 
             } else {
                 logger.info(HomeConstant.EMAIL_ALREADY_EXISTING);

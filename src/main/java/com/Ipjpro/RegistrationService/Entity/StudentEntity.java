@@ -6,9 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.Instant;
 
 @Entity
-@Table(name = "student")
+@Table(name = "users")
 public class StudentEntity {
 	@Id
 	@Column(name = "Id")
@@ -24,17 +25,27 @@ public class StudentEntity {
 	@Column(name = "nicnr")
 	private String nicNr;
 
-	@Column(name = "Email")
+	@Column(name = "email")
 	private String email;
 
-	@Column(name = "Password")
-	private String password;
-
-	@Column(name = "Mobile")
+	@Column(name = "mobile")
 	private String mobile;
 
 	@Column(name = "gender")
 	private Character gender;
+
+	@Column(name = "date")
+	private Instant date;
+
+	@Column(name = "usertype")
+	private String userType;
+
+	@Column(name = "password")
+	private String password;
+
+	@Column(name = "loginstatus")
+	private byte loginstatus;
+
 
 	public Integer getId() {
 		return id;
@@ -98,5 +109,29 @@ public class StudentEntity {
 
 	public void setGender(Character gender) {
 		this.gender = gender;
+	}
+
+	public Instant getDate() {
+		return date;
+	}
+
+	public void setDate(Instant date) {
+		this.date = date;
+	}
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
+	public byte getLoginstatus() {
+		return loginstatus;
+	}
+
+	public void setLoginstatus(byte loginstatus) {
+		this.loginstatus = loginstatus;
 	}
 }

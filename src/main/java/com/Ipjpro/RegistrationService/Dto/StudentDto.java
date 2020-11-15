@@ -1,5 +1,7 @@
 package com.Ipjpro.RegistrationService.Dto;
 
+import java.time.Instant;
+
 public class StudentDto {
 
 	private String firstName;
@@ -7,29 +9,11 @@ public class StudentDto {
 	private String nicNr;
 	private String email;
 	private String mobile;
-	private String password;
 	private Character gender;
-
-	@Override
-	public String toString() {
-		return "StudentDto{" +
-				"firstName='" + firstName + '\'' +
-				", lastName='" + lastName + '\'' +
-				", nicNr='" + nicNr + '\'' +
-				", email='" + email + '\'' +
-				", mobile='" + mobile + '\'' +
-				", password='" + password + '\'' +
-				", gender=" + gender +
-				'}';
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	private Instant date;
+	private String userType;
+	private String password;
+	private Byte loginStatus;
 
 	public String getFirstName() {
 		return firstName;
@@ -77,5 +61,37 @@ public class StudentDto {
 
 	public void setGender(Character gender) {
 		this.gender = gender;
+	}
+
+	public Instant getDate() {
+		return date;
+	}
+
+	public void setDate(Instant date) {
+		this.date = date;
+	}
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public byte getLoginStatus() {
+		return loginStatus;
+	}
+
+	public void setLoginStatus(byte loginStatus) {
+		this.loginStatus = loginStatus;
 	}
 }
