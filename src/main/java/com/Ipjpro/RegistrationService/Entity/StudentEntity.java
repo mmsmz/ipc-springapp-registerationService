@@ -14,7 +14,7 @@ public class StudentEntity {
 	@Id
 	@Column(name = "userid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Integer userid;
 
 	@Column(name = "firstname")
 	private String firstName;
@@ -47,12 +47,12 @@ public class StudentEntity {
 	private byte loginstatus;
 
 
-	public Integer getId() {
-		return id;
+	public Integer getUserid() {
+		return userid;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setUserid(Integer userid) {
+		this.userid = userid;
 	}
 
 	public String getFirstName() {
