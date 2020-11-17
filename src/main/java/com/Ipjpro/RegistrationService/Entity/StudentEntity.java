@@ -12,7 +12,7 @@ import java.time.Instant;
 @Table(name = "users")
 public class StudentEntity {
 	@Id
-	@Column(name = "Id")
+	@Column(name = "userid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
