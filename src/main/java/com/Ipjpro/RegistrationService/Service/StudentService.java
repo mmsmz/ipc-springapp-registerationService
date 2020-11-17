@@ -9,5 +9,6 @@ import java.util.List;
 @Service
 public interface StudentService {
 
-	public String register(StudentDto studentDto);
+	 String register(StudentDto studentDto);
+
 }

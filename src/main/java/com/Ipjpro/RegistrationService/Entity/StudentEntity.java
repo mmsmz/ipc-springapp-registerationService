@@ -32,7 +32,7 @@ public class StudentEntity {
 	private String mobile;
 
 	@Column(name = "gender")
-	private Character gender;
+	private char gender;
 
 	@Column(name = "date")
 	private Instant date;

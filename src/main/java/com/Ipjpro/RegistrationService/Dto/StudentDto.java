@@ -9,11 +9,9 @@ public class StudentDto {
 	private String nicNr;
 	private String email;
 	private String mobile;
-	private Character gender;
-	private Instant date;
-	private String userType;
+	private char gender;
 	private String password;
-	private Byte loginStatus;
+//	private byte loginStatus;
 
 	public String getFirstName() {
 		return firstName;
@@ -55,28 +53,12 @@ public class StudentDto {
 		this.mobile = mobile;
 	}
 
-	public Character getGender() {
+	public char getGender() {
 		return gender;
 	}
 
-	public void setGender(Character gender) {
+	public void setGender(char gender) {
 		this.gender = gender;
-	}
-
-	public Instant getDate() {
-		return date;
-	}
-
-	public void setDate(Instant date) {
-		this.date = date;
-	}
-
-	public String getUserType() {
-		return userType;
-	}
-
-	public void setUserType(String userType) {
-		this.userType = userType;
 	}
 
 	public String getPassword() {
@@ -87,11 +69,4 @@ public class StudentDto {
 		this.password = password;
 	}
 
-	public byte getLoginStatus() {
-		return loginStatus;
-	}
-
-	public void setLoginStatus(byte loginStatus) {
-		this.loginStatus = loginStatus;
-	}
 }
