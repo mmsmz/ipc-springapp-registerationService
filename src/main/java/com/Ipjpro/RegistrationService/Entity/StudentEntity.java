@@ -31,9 +31,6 @@ public class StudentEntity {
 	@Column(name = "mobile")
 	private String mobile;
 
-	@Column(name = "gender")
-	private char gender;
-
 	@Column(name = "date")
 	private Instant date;
 
@@ -101,14 +98,6 @@ public class StudentEntity {
 
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
-	}
-
-	public Character getGender() {
-		return gender;
-	}
-
-	public void setGender(Character gender) {
-		this.gender = gender;
 	}
 
 	public Instant getDate() {

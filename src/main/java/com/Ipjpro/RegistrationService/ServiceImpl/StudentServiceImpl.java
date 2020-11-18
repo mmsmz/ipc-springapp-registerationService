@@ -51,7 +51,6 @@ public class StudentServiceImpl implements StudentService {
                         student.setNicNr(studentDto.getNicNr());
                         student.setEmail(studentDto.getEmail());
                         student.setMobile(studentDto.getMobile());
-                        student.setGender(studentDto.getGender());
                         student.setDate(Instant.now());
                         student.setUserType(HomeConstant.TYPE_STUDENT);
                         student.setPassword(passwordEncoder.encode(studentDto.getPassword()));

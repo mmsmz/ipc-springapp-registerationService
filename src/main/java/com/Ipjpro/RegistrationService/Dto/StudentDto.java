@@ -9,7 +9,6 @@ public class StudentDto {
 	private String nicNr;
 	private String email;
 	private String mobile;
-	private char gender;
 	private String password;
 //	private byte loginStatus;
 
@@ -51,14 +50,6 @@ public class StudentDto {
 
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
-	}
-
-	public char getGender() {
-		return gender;
-	}
-
-	public void setGender(char gender) {
-		this.gender = gender;
 	}
 
 	public String getPassword() {
