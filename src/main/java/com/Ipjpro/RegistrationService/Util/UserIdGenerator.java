@@ -1,8 +1,5 @@
 package com.Ipjpro.RegistrationService.Util;
 
-import com.Ipjpro.RegistrationService.Controller.HomeController;
-import com.Ipjpro.RegistrationService.Entity.StudentEntity;
-import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
 import org.slf4j.Logger;
@@ -19,16 +16,14 @@ public class UserIdGenerator implements IdentifierGenerator {
     /**
      * The Logger
      */
-    final Logger logger = LoggerFactory.getLogger(HomeController.class);
+    final Logger logger = LoggerFactory.getLogger(UserIdGenerator.class);
 
     @Override
-    public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
+    public Serializable generate(SharedSessionContractImplementor session, Object object) {
         String prefix = "userid";
         Connection connection = session.connection();
 
-        try {
-            Statement statement=connection.createStatement();
-            StudentEntity student = new StudentEntity();
+        try (Statement statement=connection.createStatement()){
 
             ResultSet rs=statement.executeQuery("select count(userid) as Id from users");
 
