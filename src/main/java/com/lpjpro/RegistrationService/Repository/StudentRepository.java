@@ -11,4 +11,5 @@ import com.Ipjpro.RegistrationService.Entity.StudentEntity;
 public interface StudentRepository extends JpaRepository<StudentEntity, Long> {
 	List<StudentEntity> findByEmail(String email);
 	List<StudentEntity> findByNicNr(String nicNr);
+
 }
