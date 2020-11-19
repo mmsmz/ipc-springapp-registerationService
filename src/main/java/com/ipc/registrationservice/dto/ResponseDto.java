@@ -1,4 +1,4 @@
-package com.Ipjpro.RegistrationService.Dto;
+package com.ipc.registrationservice.dto;
 
 public class ResponseDto {
     private String message;

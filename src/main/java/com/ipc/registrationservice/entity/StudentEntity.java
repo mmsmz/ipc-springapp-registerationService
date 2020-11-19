@@ -1,11 +1,10 @@
-package com.Ipjpro.RegistrationService.Entity;
+package com.ipc.registrationservice.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.Instant;
@@ -14,7 +13,7 @@ import java.time.Instant;
 @Table(name = "users")
 public class StudentEntity {
 	@Id
-	@GenericGenerator(name = "sequence_user_id", strategy = "com.Ipjpro.RegistrationService.Util.UserIdGenerator")
+	@GenericGenerator(name = "sequence_user_id", strategy = "com.ipc.registrationservice.util.UserIdGenerator")
 	@GeneratedValue(generator = "sequence_user_id")
 	@Column(name = "userid")
 	private String userid;

@@ -1,12 +1,12 @@
-package com.Ipjpro.RegistrationService.Controller;
-import com.Ipjpro.RegistrationService.Dto.ResponseDto;
-import com.Ipjpro.RegistrationService.Util.HomeConstant;
+package com.ipc.registrationservice.controller;
+import com.ipc.registrationservice.dto.StudentDto;
+import com.ipc.registrationservice.util.HomeConstant;
+import com.ipc.registrationservice.dto.ResponseDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.Ipjpro.RegistrationService.Dto.StudentDto;
-import com.Ipjpro.RegistrationService.Service.StudentService;
+import com.ipc.registrationservice.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +30,7 @@ public class HomeController {
 	
 	@PostMapping(value = "/register", produces = "application/json")
     public ResponseEntity<ResponseDto> register(@RequestBody StudentDto studentDto) {
-        logger.info("Inside the get Registration Details method Start" + studentDto.toString());
+        logger.info("Inside the get Registration Details method Start {}", studentDto.toString());
 
         ResponseDto responseDto = new ResponseDto();
         responseDto.setMessage(HomeConstant.SUCCESS);

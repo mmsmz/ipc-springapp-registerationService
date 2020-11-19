@@ -1,6 +1,4 @@
-package com.Ipjpro.RegistrationService.Dto;
-
-import java.time.Instant;
+package com.ipc.registrationservice.dto;
 
 public class StudentDto {
 
@@ -11,6 +9,18 @@ public class StudentDto {
 	private String mobile;
 	private String password;
 //	private byte loginStatus;
+
+
+	@Override
+	public String toString() {
+		return "StudentDto{" +
+				"firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", nicNr='" + nicNr + '\'' +
+				", email='" + email + '\'' +
+				", mobile='" + mobile + '\'' +
+				'}';
+	}
 
 	public String getFirstName() {
 		return firstName;

@@ -1,4 +1,4 @@
-package com.Ipjpro.RegistrationService.Util;
+package com.ipc.registrationservice.util;
 
 public class HomeConstant {
 

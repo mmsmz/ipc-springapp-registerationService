@@ -1,4 +1,4 @@
-package com.Ipjpro.RegistrationService;
+package com.ipc.registrationservice;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

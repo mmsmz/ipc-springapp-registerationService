@@ -1,8 +1,7 @@
-package com.Ipjpro.RegistrationService.Service;
+package com.ipc.registrationservice.service;
 
+import com.ipc.registrationservice.dto.StudentDto;
 import org.springframework.stereotype.Service;
-
-import com.Ipjpro.RegistrationService.Dto.StudentDto;
 
 @Service
 public interface StudentService {

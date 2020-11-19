@@ -1,4 +1,4 @@
-package com.Ipjpro.RegistrationService.Util;
+package com.ipc.registrationservice.util;
 
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
@@ -30,12 +30,12 @@ public class UserIdGenerator implements IdentifierGenerator {
             if(rs.next())
             {
                 int id=rs.getInt(1)+101;
-                String generatedId = prefix + new Integer(id).toString();
-                logger.info("Generated Id: " + generatedId);
+                // +  new Integer(id).toString()
+                String generatedId = prefix + Integer.toString(id) ;
+                logger.info("Generated Id: {}", generatedId);
                 return generatedId;
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 

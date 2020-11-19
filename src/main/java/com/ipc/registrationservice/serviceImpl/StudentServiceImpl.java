@@ -1,10 +1,11 @@
-package com.Ipjpro.RegistrationService.ServiceImpl;
+package com.ipc.registrationservice.serviceImpl;
 
 import java.time.Instant;
 import java.util.List;
 
-import com.Ipjpro.RegistrationService.Controller.HomeController;
-import com.Ipjpro.RegistrationService.Util.HomeConstant;
+import com.ipc.registrationservice.dto.StudentDto;
+import com.ipc.registrationservice.controller.HomeController;
+import com.ipc.registrationservice.util.HomeConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +13,12 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.Ipjpro.RegistrationService.Dto.StudentDto;
-import com.Ipjpro.RegistrationService.Entity.StudentEntity;
-import com.Ipjpro.RegistrationService.Service.StudentService;
-import com.lpjpro.RegistrationService.Repository.StudentRepository;
+import com.ipc.registrationservice.entity.StudentEntity;
+import com.ipc.registrationservice.service.StudentService;
+import com.ipc.registrationservice.Repository.StudentRepository;
 
 @Service
-@EnableJpaRepositories("com.lpjpro.RegistrationService.Repository")
+@EnableJpaRepositories("com/ipc/registrationservice/Repository")
 public class StudentServiceImpl implements StudentService {
 
     /**
