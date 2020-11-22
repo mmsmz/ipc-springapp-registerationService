@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.ipc.registrationservice.entity.StudentEntity;
 
 @Repository
-public interface StudentRepository extends JpaRepository<StudentEntity, Long> {
+public interface StudentRepository extends JpaRepository<StudentEntity, String> {
 	List<StudentEntity> findByEmail(String email);
 	List<StudentEntity> findByNicNr(String nicNr);
 

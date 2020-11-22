@@ -8,8 +8,6 @@ public class StudentDto {
 	private String email;
 	private String mobile;
 	private String password;
-//	private byte loginStatus;
-
 
 	@Override
 	public String toString() {
