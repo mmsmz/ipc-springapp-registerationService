@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/registration")
 @CrossOrigin(origins = "*")
 public class HomeController {
 
@@ -23,7 +24,7 @@ public class HomeController {
 	@Autowired
 	StudentService studentService;
 	
-	@GetMapping("/")
+	@GetMapping("/home")
     String home() {
         return "<h1>Welcome!!!</h1>";
     }
