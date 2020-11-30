@@ -7,6 +7,7 @@ public class StudentDto {
 	private String nicNr;
 	private String email;
 	private String mobile;
+	private String institutebranch;
 	private String password;
 
 	@Override
@@ -17,6 +18,8 @@ public class StudentDto {
 				", nicNr='" + nicNr + '\'' +
 				", email='" + email + '\'' +
 				", mobile='" + mobile + '\'' +
+				", institutebranch='" + institutebranch + '\'' +
+				", password='" + password + '\'' +
 				'}';
 	}
 
@@ -58,6 +61,14 @@ public class StudentDto {
 
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
+	}
+
+	public String getInstitutebranch() {
+		return institutebranch;
+	}
+
+	public void setInstitutebranch(String institutebranch) {
+		this.institutebranch = institutebranch;
 	}
 
 	public String getPassword() {

@@ -1,6 +1,10 @@
 package com.ipc.registrationservice.serviceImpl;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import com.ipc.registrationservice.dto.StudentDto;
@@ -39,7 +43,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public String register(StudentDto studentDto) {
-
+        LocalDate localDate = LocalDate.now();
+        
         try {
             List<StudentEntity> checkEmail = studentRepository.findByEmail(studentDto.getEmail());
             if (checkEmail.isEmpty()) {
@@ -51,7 +56,8 @@ public class StudentServiceImpl implements StudentService {
                         student.setNicNr(studentDto.getNicNr());
                         student.setEmail(studentDto.getEmail());
                         student.setMobile(studentDto.getMobile());
-                        student.setDate(Instant.now());
+                        student.setInstituteBranch(studentDto.getInstitutebranch());
+                        student.setDate(localDate);
                         student.setUserType(HomeConstant.TYPE_STUDENT);
                         student.setPassword(passwordEncoder.encode(studentDto.getPassword()));
                         student.setLoginstatus(HomeConstant.activated);

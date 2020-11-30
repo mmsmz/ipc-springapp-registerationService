@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "users")
@@ -33,8 +35,11 @@ public class StudentEntity {
 	@Column(name = "mobile")
 	private String mobile;
 
+	@Column(name = "institutebranch")
+	private String instituteBranch;
+
 	@Column(name = "date")
-	private Instant date;
+	private LocalDate date;
 
 	@Column(name = "usertype")
 	private String userType;
@@ -102,11 +107,19 @@ public class StudentEntity {
 		this.mobile = mobile;
 	}
 
-	public Instant getDate() {
+	public String getInstituteBranch() {
+		return instituteBranch;
+	}
+
+	public void setInstituteBranch(String instituteBranch) {
+		this.instituteBranch = instituteBranch;
+	}
+
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Instant date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 

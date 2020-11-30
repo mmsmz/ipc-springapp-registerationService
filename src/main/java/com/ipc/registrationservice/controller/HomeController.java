@@ -35,7 +35,7 @@ public class HomeController {
 
         ResponseDto responseDto = new ResponseDto();
         responseDto.setMessage(HomeConstant.SUCCESS);
-        responseDto.setData( studentService.register(studentDto));
+        responseDto.setData(studentService.register(studentDto));
         logger.info("Inside the get Registration Details method End");
 
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
