@@ -103,7 +103,7 @@ public class StudentServiceImpl implements StudentService {
 					String json = mapper.writeValueAsString(emailMessageDto);
 					Map<String, Object> jsonVal = new ObjectMapper().readValue(json, HashMap.class);
 					HttpEntity<Map> entity = new HttpEntity<>(jsonVal);
-					
+					//
 					//enter the mail service Url (API)
 					String url = "http://localhost:8097/mailcontroller/send";
 					restTemplate.exchange(url, HttpMethod.POST, entity, String.class).getBody();
