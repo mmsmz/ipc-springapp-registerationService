@@ -10,6 +10,8 @@ public class StudentDto {
 	private String institutebranch;
 	private String password;
 
+	private String userAccountType;
+
 	@Override
 	public String toString() {
 		return "StudentDto{" +
@@ -79,4 +81,5 @@ public class StudentDto {
 		this.password = password;
 	}
 
+	// gettsetter
 }

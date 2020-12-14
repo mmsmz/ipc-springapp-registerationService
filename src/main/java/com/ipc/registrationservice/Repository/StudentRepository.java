@@ -12,4 +12,6 @@ public interface StudentRepository extends JpaRepository<StudentEntity, String> 
 	List<StudentEntity> findByEmail(String email);
 	List<StudentEntity> findByNicNr(String nicNr);
 
+	List<StudentEntity> findByUserid(String userId);
+
 }

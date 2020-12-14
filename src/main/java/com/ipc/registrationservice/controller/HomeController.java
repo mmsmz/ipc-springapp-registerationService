@@ -40,9 +40,19 @@ public class HomeController {
 
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
-	
-	@GetMapping("/admin")
-    public String admin() {
-        return "<h1>Hello Admin</h1>";
+
+
+    // checkotpurl
+    @GetMapping(value = "/checkotpurl", produces = "application/json")
+    public ResponseEntity<ResponseDto> checkotpurl(@RequestParam String userId, @RequestParam Integer otpPinNumber) {
+        logger.info("Inside the Check OTP URL method Start {}", otpPinNumber.toString());
+
+        ResponseDto responseDto = new ResponseDto();
+        responseDto.setMessage(HomeConstant.SUCCESS);
+        responseDto.setData(studentService.checkotpurl(userId,otpPinNumber));
+        logger.info("Inside the Check OTP URL method End");
+
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+
     }
 }

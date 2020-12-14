@@ -12,7 +12,11 @@ public class HomeConstant {
 
     public static final String TYPE_STUDENT = "student";
 
-    public static final Byte activated = 1;
-    public static final Byte deactivated= 0;
+
+    public static final Byte ACTIVATE = 1;
+    public static final Byte DEACTIVATE= 0;
+
+    public static final String USER_ACCOUNT_IPC = "IPC eLearning";
+    public static final String USER_ACCOUNT_GOOGLE = "Google";
 
 }
