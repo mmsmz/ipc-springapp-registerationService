@@ -4,11 +4,11 @@ public class HomeConstant {
 
     public static final String SUCCESS = "success";
 
-    public static final String SUCCESSFULLY_REGISTERED =  "Successfully Registered";
+    public static final String SUCCESSFULLY_REGISTERED =  "registered";
 
-    public static final String EMAIL_ALREADY_EXISTING = "Email is Already Existing";
+    public static final String EMAIL_ALREADY_EXISTING = "existingEmail";
 
-    public static final String NICNR_ALREADY_EXISTING = "NIC ID is Already Existing";
+    public static final String NICNR_ALREADY_EXISTING = "existingNIC";
 
     public static final String TYPE_STUDENT = "student";
 

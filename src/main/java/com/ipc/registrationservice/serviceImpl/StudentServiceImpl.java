@@ -79,34 +79,43 @@ public class StudentServiceImpl implements StudentService {
 					student.setUserType(HomeConstant.TYPE_STUDENT);
 					student.setPassword(passwordEncoder.encode(studentDto.getPassword()));
 					student.setLoginStatus(HomeConstant.DEACTIVATE);
-					student.setUserAccountType(HomeConstant.USER_ACCOUNT_IPC);
+
+					// google
+					// all password and useraccounttype
+					// password
+
+					student.setUserAccountType(studentDto.getUserAccountType());
+
 					studentRepository.save(student);
 					
 					//OTP Mail
-					EmailMessageDto emailMessageDto=new EmailMessageDto();
-					emailMessageDto.setToAddress(studentDto.getEmail());
-					emailMessageDto.setSubject("IPC");
+					if(studentDto.getUserAccountType().equals("IPC")) {
+						EmailMessageDto emailMessageDto = new EmailMessageDto();
+						emailMessageDto.setToAddress(studentDto.getEmail());
+						emailMessageDto.setSubject("IPC");
 
-					int randomI =  optcode();
+						int randomI = optcode();
 
-					List<StudentEntity>  studentEntitiesList = studentRepository.findByEmail(student.getEmail());
+						List<StudentEntity> studentEntitiesList = studentRepository.findByEmail(student.getEmail());
 
-					OtpMailEntity otpMailEntity = new OtpMailEntity();
-					otpMailEntity.setOtpPinNumber(randomI);
-					otpMailEntity.setUserId(studentEntitiesList.get(0).getUserid());
-					otpMailEntity.setCreatedDate(localDate);
-					otpMailRepository.save(otpMailEntity);
+						OtpMailEntity otpMailEntity = new OtpMailEntity();
+						otpMailEntity.setOtpPinNumber(randomI);
+						otpMailEntity.setUserId(studentEntitiesList.get(0).getUserid());
+						otpMailEntity.setCreatedDate(localDate);
+						otpMailRepository.save(otpMailEntity);
 
-					emailMessageDto.setBody("Click this link to activate you account: http://localhost:8093/registration/checkotpurl/?userId="+studentEntitiesList.get(0).getUserid()+"&otpPinNumber="+randomI);
+						emailMessageDto.setBody("Click this link to activate you account: http://localhost:8093/registration/checkotpurl/?userId=" + studentEntitiesList.get(0).getUserid() + "&otpPinNumber=" + randomI);
 
-					ObjectMapper mapper = new ObjectMapper();
-					String json = mapper.writeValueAsString(emailMessageDto);
-					Map<String, Object> jsonVal = new ObjectMapper().readValue(json, HashMap.class);
-					HttpEntity<Map> entity = new HttpEntity<>(jsonVal);
-					//
-					//enter the mail service Url (API)
-					String url = "http://localhost:8097/mailcontroller/send";
-					restTemplate.exchange(url, HttpMethod.POST, entity, String.class).getBody();
+						ObjectMapper mapper = new ObjectMapper();
+						String json = mapper.writeValueAsString(emailMessageDto);
+						Map<String, Object> jsonVal = new ObjectMapper().readValue(json, HashMap.class);
+						HttpEntity<Map> entity = new HttpEntity<>(jsonVal);
+						//
+						//enter the mail service Url (API)
+						String url = "http://localhost:8097/mailcontroller/send";
+						restTemplate.exchange(url, HttpMethod.POST, entity, String.class).getBody();
+					}
+
 
 					return HomeConstant.SUCCESSFULLY_REGISTERED;
 				} else {

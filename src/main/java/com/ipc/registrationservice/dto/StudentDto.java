@@ -82,4 +82,13 @@ public class StudentDto {
 	}
 
 	// gettsetter
+
+
+	public String getUserAccountType() {
+		return userAccountType;
+	}
+
+	public void setUserAccountType(String userAccountType) {
+		this.userAccountType = userAccountType;
+	}
 }

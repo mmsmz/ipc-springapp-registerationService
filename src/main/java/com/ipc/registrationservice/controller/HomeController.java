@@ -53,7 +53,7 @@ public class HomeController {
 		responseDto.setData(studentService.checkotpurl(userId, otpPinNumber));
 		logger.info("Inside the Check OTP URL method End");
 
-		return new RedirectView("http://localhost:4200/login-page?message=activated");
+		return new RedirectView("http://localhost:4200?message=activated");
 
 	}
 }
