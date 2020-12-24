@@ -52,15 +52,14 @@ public class StudentServiceImpl implements StudentService {
 	@Autowired
 	OtpMailRepository otpMailRepository;
 
-	private int optcode(){
+	private int optcode() {
 		Random randomGenerator = new Random();
 		int randomInteger = randomGenerator.nextInt(99999);
-		return  randomInteger;
+		return randomInteger;
 	}
 
-
 	@Override
-	public String register(StudentDto studentDto) {
+	public String register(StudentDto studentDto, String csid, String cpid) {
 		LocalDate localDate = LocalDate.now();
 
 		try {
@@ -81,15 +80,15 @@ public class StudentServiceImpl implements StudentService {
 					student.setLoginStatus(HomeConstant.DEACTIVATE);
 					student.setUserAccountType(HomeConstant.USER_ACCOUNT_IPC);
 					studentRepository.save(student);
-					
-					//OTP Mail
-					EmailMessageDto emailMessageDto=new EmailMessageDto();
+
+					// OTP Mail
+					EmailMessageDto emailMessageDto = new EmailMessageDto();
 					emailMessageDto.setToAddress(studentDto.getEmail());
 					emailMessageDto.setSubject("IPC");
 
-					int randomI =  optcode();
+					int randomI = optcode();
 
-					List<StudentEntity>  studentEntitiesList = studentRepository.findByEmail(student.getEmail());
+					List<StudentEntity> studentEntitiesList = studentRepository.findByEmail(student.getEmail());
 
 					OtpMailEntity otpMailEntity = new OtpMailEntity();
 					otpMailEntity.setOtpPinNumber(randomI);
@@ -97,14 +96,22 @@ public class StudentServiceImpl implements StudentService {
 					otpMailEntity.setCreatedDate(localDate);
 					otpMailRepository.save(otpMailEntity);
 
-					emailMessageDto.setBody("Click this link to activate you account: http://localhost:8093/registration/checkotpurl/?userId="+studentEntitiesList.get(0).getUserid()+"&otpPinNumber="+randomI);
-
+					if (cpid == null) {
+						emailMessageDto.setBody(
+								"Click this link to activate you account: http://localhost:8093/registration/checkotpurl/?userId="
+										+ studentEntitiesList.get(0).getUserid() + "&otpPinNumber=" + randomI);
+					} else {
+						emailMessageDto.setBody(
+								"Click this link to activate you account: http://localhost:8093/registration/checkotpurl/?userId="
+										+ studentEntitiesList.get(0).getUserid() + "&otpPinNumber=" + randomI + "&cpid="
+										+ cpid + "&csid=" + csid);
+					}
 					ObjectMapper mapper = new ObjectMapper();
 					String json = mapper.writeValueAsString(emailMessageDto);
 					Map<String, Object> jsonVal = new ObjectMapper().readValue(json, HashMap.class);
 					HttpEntity<Map> entity = new HttpEntity<>(jsonVal);
 					//
-					//enter the mail service Url (API)
+					// enter the mail service Url (API)
 					String url = "http://localhost:8097/mailcontroller/send";
 					restTemplate.exchange(url, HttpMethod.POST, entity, String.class).getBody();
 
@@ -130,10 +137,9 @@ public class StudentServiceImpl implements StudentService {
 
 		List<OtpMailEntity> otpEntitiesList = otpMailRepository.findByUserIdAndOtpPinNumber(userId, otpPinNumber);
 
-		if(otpEntitiesList.isEmpty()){
-			return  false;
-		}
-		else{
+		if (otpEntitiesList.isEmpty()) {
+			return false;
+		} else {
 			List<StudentEntity> studentEntitiesList = studentRepository.findByUserid(userId);
 			StudentEntity studentEntity = new StudentEntity();
 			studentEntity = studentEntitiesList.get(0);
@@ -142,7 +148,5 @@ public class StudentServiceImpl implements StudentService {
 			return true;
 		}
 	}
-
-
 
 }

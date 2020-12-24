@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Service
 public interface StudentService {
 
-	 String register(StudentDto studentDto);
+	 String register(StudentDto studentDto,String cpid,String csid);
 
 	 boolean checkotpurl(String userId, Integer otpPinNumber);
 

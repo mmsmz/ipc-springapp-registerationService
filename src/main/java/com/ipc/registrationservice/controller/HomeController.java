@@ -32,12 +32,13 @@ public class HomeController {
 	}
 
 	@PostMapping(value = "/register", produces = "application/json")
-	public ResponseEntity<ResponseDto> register(@RequestBody StudentDto studentDto) {
+	public ResponseEntity<ResponseDto> register(@RequestBody StudentDto studentDto,
+			@RequestParam(required = false) String cpid, @RequestParam(required = false) String csid) {
 		logger.info("Inside the get Registration Details method Start {}", studentDto.toString());
 
 		ResponseDto responseDto = new ResponseDto();
 		responseDto.setMessage(HomeConstant.SUCCESS);
-		responseDto.setData(studentService.register(studentDto));
+		responseDto.setData(studentService.register(studentDto, cpid, csid));
 		logger.info("Inside the get Registration Details method End");
 
 		return new ResponseEntity<>(responseDto, HttpStatus.OK);
