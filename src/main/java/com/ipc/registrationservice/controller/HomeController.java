@@ -26,7 +26,7 @@ public class HomeController {
 	@Autowired
 	StudentService studentService;
 
-	@GetMapping("/home")
+	@GetMapping("/test")
 	String home() {
 		return "<h1>Welcome!!!</h1>";
 	}
@@ -46,7 +46,8 @@ public class HomeController {
 
 	// checkotpurl
 	@GetMapping(value = "/checkotpurl", produces = "application/json")
-	public RedirectView checkotpurl(@RequestParam String userId, @RequestParam Integer otpPinNumber) {
+	public RedirectView checkotpurl(@RequestParam String userId, @RequestParam Integer otpPinNumber,
+									@RequestParam(required = false) String cpid, @RequestParam(required = false) String csid) {
 		logger.info("Inside the Check OTP URL method Start {}", otpPinNumber.toString());
 
 		ResponseDto responseDto = new ResponseDto();
@@ -54,7 +55,7 @@ public class HomeController {
 		responseDto.setData(studentService.checkotpurl(userId, otpPinNumber));
 		logger.info("Inside the Check OTP URL method End");
 
-		return new RedirectView("http://localhost:4200/login-page?message=activated");
+		return new RedirectView("http://localhost:4200/login-page?message=activated&cpid="+cpid + "&csid=" + csid);
 
 	}
 }

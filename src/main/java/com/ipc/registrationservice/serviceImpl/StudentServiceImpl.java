@@ -98,11 +98,11 @@ public class StudentServiceImpl implements StudentService {
 
 					if (cpid == null) {
 						emailMessageDto.setBody(
-								"Click this link to activate you account: http://localhost:8093/registration/checkotpurl/?userId="
+								"Click this link to activate you account: http://localhost:8093/registration/checkotpurl?userId="
 										+ studentEntitiesList.get(0).getUserid() + "&otpPinNumber=" + randomI);
 					} else {
 						emailMessageDto.setBody(
-								"Click this link to activate you account: http://localhost:8093/registration/checkotpurl/?userId="
+								"Click this link to activate you account: http://localhost:8093/registration/checkotpurl?userId="
 										+ studentEntitiesList.get(0).getUserid() + "&otpPinNumber=" + randomI + "&cpid="
 										+ cpid + "&csid=" + csid);
 					}
