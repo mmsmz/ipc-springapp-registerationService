@@ -10,7 +10,7 @@ import java.time.Instant;
 public class StudentPurchaseEntity {
 
     @Id
-    @GenericGenerator(name = "sequence_studpurid_id", strategy = "com.ipc.userservice.user.util.generateid.StudentPurchaseIdGenerator")
+    @GenericGenerator(name = "sequence_studpurid_id", strategy = "com.ipc.registrationservice.util.StudentPurchaseIdGenerator")
     @GeneratedValue(generator = "sequence_studpurid_id")
     @Column(name = "studpurid")
     private String studentPurchaseId;
