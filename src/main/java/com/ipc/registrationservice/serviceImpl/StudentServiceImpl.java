@@ -7,11 +7,11 @@ import java.util.Map;
 import java.util.Random;
 
 import com.ipc.registrationservice.Repository.OtpMailRepository;
+import com.ipc.registrationservice.Repository.PurchaseRepository;
 import com.ipc.registrationservice.dto.StudentDto;
 import com.ipc.registrationservice.controller.HomeController;
 import com.ipc.registrationservice.entity.OtpMailEntity;
 import com.ipc.registrationservice.util.HomeConstant;
-
 import com.ipc.registrationservice.dto.EmailMessageDto;
 
 import org.slf4j.Logger;
@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import com.ipc.registrationservice.entity.StudentEntity;
+import com.ipc.registrationservice.entity.StudentPurchaseEntity;
 import com.ipc.registrationservice.service.StudentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ipc.registrationservice.Repository.StudentRepository;
@@ -48,6 +49,9 @@ public class StudentServiceImpl implements StudentService {
 
 	@Autowired
 	public RestTemplate restTemplate;
+
+	@Autowired
+	PurchaseRepository purchaseRepository;
 
 	@Autowired
 	OtpMailRepository otpMailRepository;
@@ -96,16 +100,22 @@ public class StudentServiceImpl implements StudentService {
 					otpMailEntity.setCreatedDate(localDate);
 					otpMailRepository.save(otpMailEntity);
 
-					if (cpid == null) {
-						emailMessageDto.setBody(
-								"Click this link to activate you account: http://localhost:8093/registration/checkotpurl/?userId="
-										+ studentEntitiesList.get(0).getUserid() + "&otpPinNumber=" + randomI);
-					} else {
-						emailMessageDto.setBody(
-								"Click this link to activate you account: http://localhost:8093/registration/checkotpurl/?userId="
-										+ studentEntitiesList.get(0).getUserid() + "&otpPinNumber=" + randomI + "&cpid="
-										+ cpid + "&csid=" + csid);
+					if (cpid != null) {
+						try {
+							StudentPurchaseEntity studentPurEntity = new StudentPurchaseEntity();
+							studentPurEntity.setUserId(studentEntitiesList.get(0).getUserid());
+							studentPurEntity.setCoursePriceId(cpid);
+							studentPurEntity.setCourseScheduleId(csid);
+							purchaseRepository.save(studentPurEntity);
+						} catch (Exception e) {
+							logger.info(e.getMessage());
+							return e.getMessage();
+						}
 					}
+					emailMessageDto.setBody(
+							"Click this link to activate you account: http://localhost:8093/registration/checkotpurl/?userId="
+									+ studentEntitiesList.get(0).getUserid() + "&otpPinNumber=" + randomI);
+
 					ObjectMapper mapper = new ObjectMapper();
 					String json = mapper.writeValueAsString(emailMessageDto);
 					Map<String, Object> jsonVal = new ObjectMapper().readValue(json, HashMap.class);
