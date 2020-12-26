@@ -113,7 +113,7 @@ public class StudentServiceImpl implements StudentService {
 						}
 					}
 					emailMessageDto.setBody(
-							"Click this link to activate you account: http://localhost:8093/registration/checkotpurl/?userId="
+							"Click this link to activate you account: http://localhost:8093/registration/checkotpurl?userId="
 									+ studentEntitiesList.get(0).getUserid() + "&otpPinNumber=" + randomI);
 
 					ObjectMapper mapper = new ObjectMapper();

@@ -1,0 +1,5 @@
+FROM openjdk:12-alpine
+
+COPY build/libs/RegistrationService-*.jar /RegistrationService.jar
+
+CMD ["java","-jar", "/RegistrationService.jar"]
