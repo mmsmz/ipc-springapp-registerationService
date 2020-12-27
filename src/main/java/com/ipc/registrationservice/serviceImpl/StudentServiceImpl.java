@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import com.ipc.registrationservice.Repository.ForgetPasswordRepository;
 import com.ipc.registrationservice.Repository.OtpMailRepository;
 import com.ipc.registrationservice.Repository.PurchaseRepository;
 import com.ipc.registrationservice.dto.StudentDto;
 import com.ipc.registrationservice.controller.HomeController;
+import com.ipc.registrationservice.entity.ForgetPasswordEntity;
 import com.ipc.registrationservice.entity.OtpMailEntity;
 import com.ipc.registrationservice.util.HomeConstant;
 import com.ipc.registrationservice.dto.EmailMessageDto;
@@ -29,6 +31,7 @@ import org.springframework.web.client.RestTemplate;
 import com.ipc.registrationservice.entity.StudentEntity;
 import com.ipc.registrationservice.entity.StudentPurchaseEntity;
 import com.ipc.registrationservice.service.StudentService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ipc.registrationservice.Repository.StudentRepository;
 
@@ -55,6 +58,9 @@ public class StudentServiceImpl implements StudentService {
 
 	@Autowired
 	OtpMailRepository otpMailRepository;
+
+	@Autowired
+	ForgetPasswordRepository forgetPasswordRepository;
 
 	private int optcode() {
 		Random randomGenerator = new Random();
@@ -156,6 +162,48 @@ public class StudentServiceImpl implements StudentService {
 			studentEntity.setLoginStatus(HomeConstant.ACTIVATE);
 			studentRepository.save(studentEntity);
 			return true;
+		}
+	}
+
+	@Override
+	public String forgetPassword(String email) {
+		List<StudentEntity> studentEntitiesList = studentRepository.findByEmail(email);
+		ForgetPasswordEntity forgetPasswordEntity = new ForgetPasswordEntity();
+		forgetPasswordEntity.setUserId(studentEntitiesList.get(0).getUserid());
+		forgetPasswordEntity.setOtpPinNumber(optcode());
+		forgetPasswordRepository.save(forgetPasswordEntity);
+		EmailMessageDto emailMessageDto = new EmailMessageDto();
+		emailMessageDto.setToAddress(email);
+		emailMessageDto.setSubject("IPC");
+		emailMessageDto.setBody(
+				"Click this link to reset your password: http://localhost:8093/registration/checkreseturl?userId="
+						+ studentEntitiesList.get(0).getUserid() + "&pin=" + forgetPasswordEntity.getOtpPinNumber());
+		ObjectMapper mapper = new ObjectMapper();
+		String json;
+		try {
+			json = mapper.writeValueAsString(emailMessageDto);
+			Map<String, Object> jsonVal;
+			jsonVal = new ObjectMapper().readValue(json, HashMap.class);
+			HttpEntity<Map> entity = new HttpEntity<>(jsonVal);
+			//
+			// enter the mail service Url (API)
+			String url = "http://localhost:8097/mailcontroller/send";
+			restTemplate.exchange(url, HttpMethod.POST, entity, String.class).getBody();
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return "Reset Mail Sent";
+	}
+
+	@Override
+	public boolean checkResetUrl(String userId, Integer pin) {
+		ForgetPasswordEntity forgetPasswordEntity = forgetPasswordRepository.findByUserIdAndPin(userId, pin);
+		if (forgetPasswordEntity != null) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 

@@ -57,4 +57,28 @@ public class HomeController {
 		return new RedirectView("http://localhost:4200/login-page?message=activated");
 
 	}
+
+	@PostMapping(value = "/launchatlogin", produces = "application/json")
+	public ResponseEntity<ResponseDto> forgetPassword(@RequestParam String email) {
+		logger.info("Inside the forgetPassword method Start {}", email);
+
+		ResponseDto responseDto = new ResponseDto();
+		responseDto.setMessage(HomeConstant.SUCCESS);
+		responseDto.setData(studentService.forgetPassword(email));
+		logger.info("Inside the forgetPassword method End");
+
+		return new ResponseEntity<>(responseDto, HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/checkreseturl", produces = "application/json")
+	public ResponseEntity<ResponseDto> checkreseturl(@RequestParam String userId, @RequestParam Integer pin) {
+		logger.info("Inside the forgetPassword method Start {}", userId, pin);
+
+		ResponseDto responseDto = new ResponseDto();
+		responseDto.setMessage(HomeConstant.SUCCESS);
+		responseDto.setData(studentService.checkResetUrl(userId, pin));
+		logger.info("Inside the forgetPassword method End");
+
+		return new ResponseEntity<>(responseDto, HttpStatus.OK);
+	}
 }

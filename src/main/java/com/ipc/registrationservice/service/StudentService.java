@@ -10,5 +10,9 @@ public interface StudentService {
 	String register(StudentDto studentDto, String cpid, String csid);
 
 	boolean checkotpurl(String userId, Integer otpPinNumber);
+	
+	String forgetPassword(String email);
+	
+	boolean checkResetUrl(String userid,Integer pin);
 
 }
