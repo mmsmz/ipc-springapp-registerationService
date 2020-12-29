@@ -71,15 +71,15 @@ public class HomeController {
 	}
 
 	@GetMapping(value = "/checkreseturl", produces = "application/json")
-	public ResponseEntity<ResponseDto> checkReseturl(@RequestParam String userId, @RequestParam Integer pin) {
+	public RedirectView checkReseturl(@RequestParam String userId, @RequestParam Integer pin) {
 		logger.info("Inside the forgetPassword method Start {}", userId, pin);
-
-		ResponseDto responseDto = new ResponseDto();
-		responseDto.setMessage(HomeConstant.SUCCESS);
-		responseDto.setData(studentService.checkResetUrl(userId, pin));
+		String url="";
+		if (studentService.checkResetUrl(userId, pin)) {
+			url="";
+		}
 		logger.info("Inside the forgetPassword method End");
 
-		return new ResponseEntity<>(responseDto, HttpStatus.OK);
+		return new RedirectView(url);
 	}
 
 	@GetMapping(value = "/resetpassword", produces = "application/json")
