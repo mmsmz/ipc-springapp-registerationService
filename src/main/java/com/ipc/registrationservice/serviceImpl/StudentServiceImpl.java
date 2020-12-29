@@ -170,14 +170,14 @@ public class StudentServiceImpl implements StudentService {
 		List<StudentEntity> studentEntitiesList = studentRepository.findByEmail(email);
 		ForgetPasswordEntity forgetPasswordEntity = new ForgetPasswordEntity();
 		forgetPasswordEntity.setUserId(studentEntitiesList.get(0).getUserid());
-		forgetPasswordEntity.setOtpPinNumber(optcode());
+		forgetPasswordEntity.setPin(optcode());
 		forgetPasswordRepository.save(forgetPasswordEntity);
 		EmailMessageDto emailMessageDto = new EmailMessageDto();
 		emailMessageDto.setToAddress(email);
 		emailMessageDto.setSubject("IPC");
 		emailMessageDto.setBody(
 				"Click this link to reset your password: http://localhost:8093/registration/checkreseturl?userId="
-						+ studentEntitiesList.get(0).getUserid() + "&pin=" + forgetPasswordEntity.getOtpPinNumber());
+						+ studentEntitiesList.get(0).getUserid() + "&pin=" + forgetPasswordEntity.getPin());
 		ObjectMapper mapper = new ObjectMapper();
 		String json;
 		try {
@@ -204,6 +204,20 @@ public class StudentServiceImpl implements StudentService {
 			return true;
 		} else {
 			return false;
+		}
+	}
+
+	@Override
+	public String resetPassword(String userId, String newPassword, Integer pin) {
+		ForgetPasswordEntity forgetPasswordEntity = forgetPasswordRepository.findByUserIdAndPin(userId, pin);
+		if (forgetPasswordEntity != null) {
+			StudentEntity studentEntity = new StudentEntity();
+			studentEntity.setUserid(userId);
+			studentEntity.setPassword(newPassword);
+			studentRepository.save(studentEntity);
+			return "Password Resetted";
+		} else {
+			return "Invalid Pin";
 		}
 	}
 

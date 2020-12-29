@@ -58,7 +58,7 @@ public class HomeController {
 
 	}
 
-	@PostMapping(value = "/launchatlogin", produces = "application/json")
+	@PostMapping(value = "/forgetpassword", produces = "application/json")
 	public ResponseEntity<ResponseDto> forgetPassword(@RequestParam String email) {
 		logger.info("Inside the forgetPassword method Start {}", email);
 
@@ -71,7 +71,7 @@ public class HomeController {
 	}
 
 	@GetMapping(value = "/checkreseturl", produces = "application/json")
-	public ResponseEntity<ResponseDto> checkreseturl(@RequestParam String userId, @RequestParam Integer pin) {
+	public ResponseEntity<ResponseDto> checkReseturl(@RequestParam String userId, @RequestParam Integer pin) {
 		logger.info("Inside the forgetPassword method Start {}", userId, pin);
 
 		ResponseDto responseDto = new ResponseDto();
@@ -81,4 +81,17 @@ public class HomeController {
 
 		return new ResponseEntity<>(responseDto, HttpStatus.OK);
 	}
+
+	@GetMapping(value = "/resetpassword", produces = "application/json")
+	public ResponseEntity<ResponseDto> resetPassword(@RequestParam String userid, @RequestParam String newpassword,
+			@RequestParam Integer pin) {
+		logger.info("Inside the reset password method Start {}", userid, newpassword, pin);
+
+		ResponseDto responseDto = new ResponseDto();
+		responseDto.setMessage(HomeConstant.SUCCESS);
+		responseDto.setData(studentService.resetPassword(userid, newpassword, pin));
+		logger.info("Inside the reset password method End");
+		return new ResponseEntity<>(responseDto, HttpStatus.OK);
+	}
+
 }

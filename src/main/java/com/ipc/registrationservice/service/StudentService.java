@@ -14,5 +14,7 @@ public interface StudentService {
 	String forgetPassword(String email);
 	
 	boolean checkResetUrl(String userid,Integer pin);
+	
+	String resetPassword(String userId,String newPassword,Integer pin);
 
 }

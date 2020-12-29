@@ -2,6 +2,8 @@ package com.ipc.registrationservice.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -14,7 +16,7 @@ public class ForgetPasswordEntity {
 	private String userId;
 
 	@Column(name = "pin")
-	private Integer otpPinNumber;
+	private Integer pin;
 
 	public String getUserId() {
 		return userId;
@@ -24,12 +26,12 @@ public class ForgetPasswordEntity {
 		this.userId = userId;
 	}
 
-	public Integer getOtpPinNumber() {
-		return otpPinNumber;
+	public Integer getPin() {
+		return pin;
 	}
 
-	public void setOtpPinNumber(Integer otpPinNumber) {
-		this.otpPinNumber = otpPinNumber;
+	public void setPin(Integer pin) {
+		this.pin = pin;
 	}
 
 }
