@@ -176,7 +176,7 @@ public class StudentServiceImpl implements StudentService {
 		emailMessageDto.setToAddress(email);
 		emailMessageDto.setSubject("IPC");
 		emailMessageDto.setBody(
-				"Click this link to reset your password: http://localhost:8093/registration/checkreseturl?userId="
+				"Click this link to reset your password: http://localhost:4200/forget-password?userId="
 						+ studentEntitiesList.get(0).getUserid() + "&pin=" + forgetPasswordEntity.getPin());
 		ObjectMapper mapper = new ObjectMapper();
 		String json;
@@ -211,9 +211,9 @@ public class StudentServiceImpl implements StudentService {
 	public String resetPassword(String userId, String newPassword, Integer pin) {
 		ForgetPasswordEntity forgetPasswordEntity = forgetPasswordRepository.findByUserIdAndPin(userId, pin);
 		if (forgetPasswordEntity != null) {
-			StudentEntity studentEntity = new StudentEntity();
-			studentEntity.setUserid(userId);
-			studentEntity.setPassword(newPassword);
+			List<StudentEntity> studentEntityList = studentRepository.findByUserid(userId);
+			StudentEntity studentEntity=studentEntityList.get(0);
+			studentEntity.setPassword(passwordEncoder.encode(newPassword));
 			studentRepository.save(studentEntity);
 			return "Password Resetted";
 		} else {
